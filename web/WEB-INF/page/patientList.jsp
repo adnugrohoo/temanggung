@@ -4,6 +4,8 @@
     Author     : Adhi
 --%>
 
+<%@page import="dao.PatientDao"%>
+<%@page import="service.ConnectionMySQL"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -24,12 +26,12 @@
                 <div class="row white">
                     <br>
                         <div class="col-lg-12">
-                            <h1 class="left-oriented">List</h1>
+                            <h1 class="left-oriented">Daftar Pasien</h1>
                             <hr>
                         </div>
 
                         <div class="col-lg-12">
-                            <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add New Patient</button>
+                            <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Tambah Pasien Baru</button>
                         </div>
 
                         <div class="col-lg-12">
@@ -37,11 +39,11 @@
                                 <thead>						
                                     <tr>
                                         <th>NO</th>
-                                        <th>NO</th>
-                                        <th>NAME</th>
-                                        <th>GOLONGAN DARAH</th>
-                                        <th>ADDRESS</th>
-                                        <th>ACTION</th>
+                                        <th>NO RM</th>
+                                        <th>NAMa</th>
+                                        <th>GOL DARAH</th>
+                                        <th>ALAMAT</th>
+                                        <th>TINDAKAN</th>
                                     </tr>							
                                 </thead>
 
@@ -114,24 +116,27 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Input data pasien</h4>
+                                    <h4 class="modal-title">Input Data Pasien</h4>
                                 </div>
                                 <div class="modal-body">
                                     <form class="form-horizontal" role="form">
                                         <div class="form-group">
+                                            <% 
+                                                PatientDao patientDao = ConnectionMySQL.getPatientDao();
+                                            %>
                                             <div class="col-lg-2">
-                                                <span>No RM</span>
+                                                <span>No Pasien</span>
                                             </div>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="text1" name="patientNo" placeholder="No RM" value="${patientforedit.patientNo}">
+                                                <input type="text" class="form-control" readonly="readonly" id="text1" name="patientNo" value="<%=patientDao.kodeOtomatis()%>">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-2">
-                                                <span>Name</span>
+                                                <span>Nama</span>
                                             </div>
                                             <div class="col-lg-10">
-                                                <input type="text" class="form-control" id="inputEmail1" name="patientName" placeholder="Name" value="${patientforedit.patientName}" >
+                                                <input type="text" class="form-control" id="inputEmail1" name="patientName" placeholder="Nama" value="${patientforedit.patientName}" >
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -140,7 +145,7 @@
                                             </div>
                                             <div class="col-lg-4">
                                                 <select name="patientGolonganDarah" id="dropdown-menu" class="form-control selcls" >
-                                                    <option value="">- Select one -</option>
+                                                    <option value="">- Pilih Salah Satu -</option>
                                                     <c:forEach items="${golonganDarahs}" var="golonganDarah">
                                                         <c:if test="${pendonorforedit.comGolonganDarah.getComGolonganDarahId() == golonganDarah.getComGolonganDarahId()}">
                                                             <option value="${golonganDarah.getComGolonganDarahId()}" selected="selected">${golonganDarah.getComGolonganDarahName()}</option>
@@ -154,10 +159,10 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-2">
-                                                <span>Address</span>
+                                                <span>Alamat</span>
                                             </div>
                                             <div class="col-lg-10">
-                                                <input type="text" class="form-control" id="text1" name="patientAddress" placeholder="Address" value="${patientforedit.patientAddress}">
+                                                <input type="text" class="form-control" id="text1" name="patientAddress" placeholder="Alamat" value="${patientforedit.patientAddress}">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -166,7 +171,7 @@
 
                                                 </div>
                                                 <div class="col-lg-10">
-                                                    <button type="submit" class="btn btn-success" formmethod="POST" formaction="controler?/action=patientsave&id=${patientforedit.patientId}" >Submit</button>
+                                                    <button type="submit" class="btn btn-success" formmethod="POST" formaction="controler?/action=patientsave&id=${patientforedit.patientId}" >Tambah</button>
                                                 </div>
                                             </c:if>
                                             <c:if test="${patientforedit==null}">
@@ -174,14 +179,14 @@
 
                                                 </div>
                                                 <div class="col-lg-10">
-                                                    <button type="submit" class="btn btn-success" formmethod="POST" formaction="controler?/action=patientsave">Submit</button>
+                                                    <button type="submit" class="btn btn-success" formmethod="POST" formaction="controler?/action=patientsave">Tambah</button>
                                                 </div>
                                             </c:if>
                                         </div>
                                     </form><!-- form -->
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
                                 </div>
                             </div>
 

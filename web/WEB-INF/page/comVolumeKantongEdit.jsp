@@ -15,8 +15,8 @@
     <div class="titleArea">
         <div class="wrapper">
             <div class="pageTitle">
-                <h5>Dashboard</h5>
-                <span>Do your layouts deserve better than Lorem Ipsum.</span>
+                <h5>Beranda</h5>
+                
             </div>
             <div class="clear"></div>
         </div>
@@ -27,15 +27,15 @@
     <!-- Main content wrapper -->
     <div class="wrapper">
         
-        <div class="nNote nInformation hideit">
+<!--        <div class="nNote nInformation hideit">
             <p><strong>INFORMATION: </strong>Form elements were divided into 4 different pages. Don't forget to check all of them!</p>
-        </div>
+        </div>-->
         
         <!-- Validation form -->
         <form id="usualValidate" class="form" method="post" action="">
         	<fieldset>
                 <div class="widget">
-                    <div class="title"><img src="assets/tfcrown/images/icons/dark/alert.png" alt="" class="titleIcon" /><h6>Usual form validation</h6></div>
+                    <div class="title"><img src="assets/tfcrown/images/icons/dark/alert.png" alt="" class="titleIcon" /><h6>Form Pengisian Volume Kantong Darah</h6></div>
                     <div class="formRow">
                         <label>Volume Kantong:<span class="req">*</span></label>
                         <div class="formRight"><input type="text" class="required" name="comVolumeKantongName" value="${comVolumeKantongforedit.comVolumeKantongName}" id="firstname"/></div><div class="clear"></div>

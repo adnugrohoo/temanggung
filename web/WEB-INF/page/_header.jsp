@@ -23,11 +23,46 @@
 
     <script src="assets/js/jquery.min.js"></script>
     <script type="text/javascript" src="assets/js/modernizr.custom.js"></script>
-    <script src="assets/js/bootstrap.js"></script>
+    <!--<script src="assets/js/bootstrap.js"></script>-->
     <script src="assets/js/bootstrap.min.js"></script>
 
+    <!--Auto Complete-->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/jquery.autocomplete.css" />
+    <script src="js/jquery-autocomplete.js"></script>
 
-
+      <style>
+        .boxRedColor {
+            width: 80px;
+            padding: 5px;
+            border: 1px solid black;
+            background-color: red;
+            height: 20px;
+        }
+        .boxYellowColor {
+            width: 80px;
+            padding: 5px;
+            border: 1px solid black;
+            background-color: yellow;
+        }
+        .boxYellowColor:hover {
+                background: #FC0;
+                background-image: -webkit-linear-gradient(top, #FC0, #eea236);
+                background-image: -moz-linear-gradient(top, #FC0, #eea236);
+                background-image: -ms-linear-gradient(top, #FC0, #eea236);
+                background-image: -o-linear-gradient(top, #FC0, #eea236);
+                background-image: linear-gradient(to bottom, #FC0, #eea236);
+                text-decoration: none;
+            }
+        .boxGreenColor {
+            width: 80px;
+            padding: 5px;
+            border: 1px solid black;
+            background-color: green;
+            height: 20px;
+        }
+        
+    </style>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="assets/js/html5shiv.js"></script>

@@ -86,12 +86,12 @@
                                                             <table class="table">
                                                                 <tr>
                                                                     <td>
-                                                                        <a href="controler?/action=orderList">Permintaan Kantong Darah</a></span>
+                                                                        <a href="controler?/action=orderList">Permintaan Kantong Darah</a>
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td>
-                                                                        <a href="http://www.jquery2dotnet.com">Permintaan Kantong Darah (Dropping)</a>
+                                                                        <a href="controler?/action=DroppingList">Permintaan Kantong Darah (Dropping)</a>
                                                                     </td>
                                                                 </tr>
                                                             </table>

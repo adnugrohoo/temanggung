@@ -15,7 +15,7 @@
             <div class="titleArea">
                 <div class="wrapper">
                     <div class="pageTitle">
-                        <h5>Dashboard ></h5>
+                        <h5>Beranda ></h5>
                         <span></span>
                     </div>
                     <div class="clear"></div>
@@ -30,7 +30,7 @@
 
             <c:if test="${message == null}">
                 <div class="nNote nInformation hideit">                                
-                    <p><strong>INFORMATION: </strong>Form elements. Don't forget to check all of them!</p>
+                    <p><strong>INFORMATION: </strong>Daftar Cross Match</p>
                 </div>
             </c:if>
 
@@ -53,7 +53,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nomor</th>
+                            <th>Nama Pasien</th>
                             <th>Tanggal</th>
                             <th>Status Ambil</th>
                             <th>Reaksi Pendonor</th>
@@ -69,7 +69,7 @@
                                     <%=i%>
                                 </td>
                                 <td>
-                                    ${cross.getAftapNoKantong()}
+                                    <%--${cross.getAftapPasien}--%>
                                 </td>
                                 <td>
                                     ${cross.getAftapTanggal()}

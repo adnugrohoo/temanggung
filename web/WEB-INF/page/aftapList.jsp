@@ -15,7 +15,7 @@
             <div class="titleArea">
                 <div class="wrapper">
                     <div class="pageTitle">
-                        <h5>Dashboard > Aftap</h5>
+                        <h5>Beranda > Aftap</h5>
                         <span></span>
                     </div>
                     <div class="clear"></div>
@@ -47,7 +47,7 @@
 
             <c:if test="${message == null}">
                 <div class="nNote nInformation hideit">                                
-                    <p><strong>INFORMATION: </strong>Form elements. Don't forget to check all of them!</p>
+                    <p><strong>INFORMATION: </strong>Halaman Daftar Aftap</p>
                 </div>
             </c:if>
 
@@ -70,12 +70,14 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nomor</th>
+                            <th>Nomor Kantong</th>
+                            <th>Jenis Kantong</th>
                             <th>No Pendonor</th>
                             <th>Tanggal</th>
                             <th>Status Ambil</th>
                             <th>Reaksi Pendonor</th>
                             <th>Volume Kantong Darah</th>
+                            <th>Petugas Aftap</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -88,6 +90,9 @@
                                 </td>
                                 <td>
                                     ${aftap.getAftapNoKantong()}
+                                </td>
+                                <td>
+                                    <%--${aftap.getJenisKantong()}--%>
                                 </td>
                                 <td>
                                     ${aftap.pendonor.getPendonorNo()}
@@ -103,7 +108,10 @@
                                 </td>
                                 <td>
                                     ${aftap.comVolumeKantong.getComVolumeKantongName()}
-                                </td>                                           
+                                </td>
+                                <td>
+                                    <%--${aftap.getPetugasAftap()}--%>
+                                </td>
                                 <td align="center">
                                     <a href="controler?/action=aftapEdit&id=${aftap.getAftapId()}" class="glyphicon glyphicon-edit" title="Edit Aftap"><img src="assets/tfcrown/images/icons/edit.png" alt=""></a>
                                     <a href="controler?/action=aftapDelete&id=${aftap.getAftapId()}" class="glyphicon glyphicon-remove" title="Delete Aftap"><img src="assets/tfcrown/images/icons/remove.png" alt=""></a>

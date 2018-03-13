@@ -24,14 +24,14 @@
                 <div class="row white">
                     <br>
                         <div class="col-lg-12">
-                            <h1 class="left-oriented">List</h1>
+                            <h1 class="left-oriented">Daftar Dokter</h1>
                             <hr>
                         </div>
 
                         <div class="col-lg-12">
                             <%--  <a href="controler?/action=docteredit" class="btn btn-info btn-lg">Add New Docter</a> --%>
 
-                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Add New Docter</button>
+                            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Tambah Dokter Baru</button>
                         </div>
 
                         <div class="col-lg-12">
@@ -41,8 +41,8 @@
                                         <th>NO</th>
                                         <th>NAMA</th>
                                         <th>ALAMAT</th>
-                                        <th>TELEPHONE</th>
-                                        <th width="10px">ACTION</th>
+                                        <th>NO TELP</th>
+                                        <th width="10px">TINDAKAN</th>
                                     </tr>							
                                 </thead>
 
@@ -112,32 +112,32 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Modal Header</h4>
+                                    <h4 class="modal-title">Input Data Dokter</h4>
                                 </div>
                                 <div class="modal-body">
                                     <form class="form-horizontal" role="form">
                                         <div class="form-group">
                                             <div class="col-lg-2">
-                                                <span>Name</span>
+                                                <span>Nama</span>
                                             </div>
                                             <div class="col-lg-6">
-                                                <input type="text" class="form-control" id="inputEmail1" name="docterName" placeholder="Name" value="${docterforedit.docterName}" >
+                                                <input type="text" class="form-control" id="inputEmail1" name="docterName" placeholder="Nama" value="${docterforedit.docterName}" >
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-2">
-                                                <span>Address</span>
+                                                <span>Alamat</span>
                                             </div>
                                             <div class="col-lg-10">
-                                                <input type="text" class="form-control" id="text1" name="docterAddress" placeholder="Address" value="${docterforedit.docterAddress}">
+                                                <input type="text" class="form-control" id="text1" name="docterAddress" placeholder="Alamat" value="${docterforedit.docterAddress}">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <div class="col-lg-2">
-                                                <span>Telephone</span>
+                                                <span>No Telp</span>
                                             </div>
                                             <div class="col-lg-10">
-                                                <input type="text" class="form-control" id="text1" name="docterTelp" placeholder="Phone" value="${docterforedit.docterTelp}">
+                                                <input type="text" class="form-control" id="text1" name="docterTelp" placeholder="Nomor Telepon" value="${docterforedit.docterTelp}">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -146,8 +146,8 @@
 
                                                 </div>
                                                 <div class="col-lg-11">
-                                                    <button type="submit" class="btn btn-success" formmethod="POST" formaction="controler?/action=doctersave&id=${docterforedit.docterId}" >Submit</button>
-                                                    <button class="btn btn-danger" formmethod="POST"><a href="controler?/action=docterList" title="">Cancel</a></button>
+                                                    <button type="submit" class="btn btn-success" formmethod="POST" formaction="controler?/action=doctersave&id=${docterforedit.docterId}" >Tambah</button>
+                                                    <button class="btn btn-danger" formmethod="POST"><a href="controler?/action=docterList" title="">Batal</a></button>
                                                 </div>
                                             </c:if>
                                             <c:if test="${docterforedit==null}">
@@ -155,15 +155,15 @@
 
                                                 </div>
                                                 <div class="col-lg-11">
-                                                    <button type="submit" class="btn btn-success" formmethod="POST" formaction="controler?/action=doctersave">Submit</button>
-                                                    <button class="btn btn-danger" formmethod="POST"><a href="controler?/action=docterList" title="">Cancel</a></button>
+                                                    <button type="submit" class="btn btn-success" formmethod="POST" formaction="controler?/action=doctersave">Tambah</button>
+                                                    <button class="btn btn-danger" formmethod="POST"><a href="controler?/action=docterList" title="">Batal</a></button>
                                                 </div>
                                             </c:if>
                                         </div>
                                     </form><!-- form -->
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Keluar</button>
                                 </div>
                             </div>
 

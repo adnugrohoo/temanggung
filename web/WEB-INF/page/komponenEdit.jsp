@@ -15,7 +15,7 @@
             <div class="titleArea">
                 <div class="wrapper">
                     <div class="pageTitle">
-                        <h5>Dashboard > Tambah/Edit Pendonor</h5>
+                        <h5>Beranda > Tambah/Edit Komponen Darah</h5>
                         <span></span>
                     </div>
                     <div class="clear"></div>
@@ -28,7 +28,7 @@
             <div class="wrapper">
 
                 <div class="nNote nInformation hideit">
-                    <p><strong>INFORMATION: </strong>Form elements were divided into 4 different pages. Don't forget to check all of them!</p>
+                    <p><strong>INFORMATION: </strong>Isi form tambah komponen berikut dengan benar</p>
                 </div> 
 
                 <!-- Validation form -->
@@ -37,11 +37,11 @@
                         <div class="widget">
                             <div class="title"><img src="assets/tfcrown/images/icons/dark/alert.png" alt="" class="titleIcon" /><h6>Form</h6></div>
 
-                            <div class="formRow">
+<!--                            <div class="formRow">
                                 <label>Nomor Komponen</label>
                                 <div class="formRight"><input type="text" name="komponenNo" value="${komponenforedit.komponenNo}" /></div>
                             <div class="clear"></div>
-                        </div>
+                        </div>-->
 
                         <div class="formRow">
                             <label>Nomor Kantong :<span class="req">*</span></label>
@@ -49,7 +49,7 @@
                         </div>                  
 
                         <div class="formRow">
-                            <label>Tanggal Srceening :<span class="req">*</span></label>
+                            <label>Tanggal Pembuatan :<span class="req">*</span></label>
                             <div class="formRight"><input type="text" class="datepicker" name="komponenTanggal" value="${komponenforedit.getKomponenTanggal()}" id="date"/></div><div class="clear"></div>
                         </div> 
                         

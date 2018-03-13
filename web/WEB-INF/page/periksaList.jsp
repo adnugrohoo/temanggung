@@ -15,7 +15,7 @@
             <div class="titleArea">
                 <div class="wrapper">
                     <div class="pageTitle">
-                        <h5>Dashboard > Periksa</h5>
+                        <h5>Beranda > Periksa</h5>
                         <span></span>
                     </div>
                     <div class="clear"></div>
@@ -47,7 +47,7 @@
 
             <c:if test="${message == null}">
                 <div class="nNote nInformation hideit">                                
-                    <p><strong>INFORMATION: </strong>Form elements. Don't forget to check all of them!</p>
+                    <p><strong>INFORMATION: </strong>Daftar Periksa Para Pendonor</p>
                 </div>
             </c:if>
 
@@ -78,6 +78,7 @@
                             <th>Riwayat Medis</th>
                             <th>Keputusan</th>
                             <th>Alasan</th>
+                            <th>Petugas</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -111,7 +112,10 @@
                                 </td>                             
                                 <td>
                                     ${periksa.getPeriksaAlasan()}
-                                </td>                                        
+                                </td>
+                                <td>
+                                    <%--${periksa.getPetugas()}--%>
+                                </td>
                                 <td align="center">
                                     <a href="controler?/action=periksaEdit&id=${periksa.getPeriksaId()}" class="glyphicon glyphicon-edit" title="Edit Periksa"><img src="assets/tfcrown/images/icons/edit.png" alt=""></a>
                                     <a href="controler?/action=periksaDelete&id=${periksa.getPeriksaId()}" class="glyphicon glyphicon-remove" title="Delete Periksa"><img src="assets/tfcrown/images/icons/remove.png" alt=""></a>

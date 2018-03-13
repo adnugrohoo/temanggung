@@ -1,3 +1,8 @@
+<%@page import="entity.Komponen"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="dao.KomponenDao"%>
+<%@page import="service.ConnectionMySQL"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <jsp:include page="_headerStaffPmi.jsp"></jsp:include>
@@ -15,7 +20,7 @@
             <div class="titleArea">
                 <div class="wrapper">
                     <div class="pageTitle">
-                        <h5>Dashboard > Komponen</h5>
+                        <h5>Beranda > Komponen</h5>
                         <span></span>
                     </div>
                     <div class="clear"></div>
@@ -47,7 +52,7 @@
 
             <c:if test="${message == null}">
                 <div class="nNote nInformation hideit">                                
-                    <p><strong>INFORMATION: </strong>Form elements. Don't forget to check all of them!</p>
+                    <p><strong>INFORMATION: </strong>Halaman Komponen Darah</p>
                 </div>
             </c:if>
 
@@ -70,10 +75,10 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nomor Komponen</th>
                             <th>No Kantong</th>
+                            <th>Golongan Darah</th>
                             <th>Jenis Komponen</th>
-                            <th>Tanggal</th>
+                            <th>Tanggal Pembuatan</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -84,11 +89,14 @@
                                 <td>
                                     <%=i%>
                                 </td>
-                                <td>
-                                    ${komponen.getKomponenNo()}
-                                </td>
+
                                 <td>
                                     ${komponen.aftap.getAftapNoKantong()}
+                                </td>
+
+                                <td>
+                                    ${komponen.aftap.pendonor.comGolonganDarah.getComGolonganDarahName()}
+
                                 </td>
                                 <td>
                                     ${komponen.comKomponenDarah.getComKomponenDarahName()}

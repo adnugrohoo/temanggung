@@ -15,7 +15,7 @@
     <div class="titleArea">
         <div class="wrapper">
             <div class="pageTitle">
-                <h5>Dashboard > Golongan Darah</h5>
+                <h5>Beranda > Golongan Darah</h5>
                 <span></span>
             </div>
             <div class="clear"></div>
@@ -31,7 +31,7 @@
                     <br>
                 <ul align="left">
                     <li align="left">
-                        <a href="controler?/action=comGolonganDarahEdit" title=""><img src="assets/tfcrown/images/icons/control/16/pencil.png" alt=""><span>Add New Golongan Darah</span></a>
+                        <a href="controler?/action=comGolonganDarahEdit" title=""><img src="assets/tfcrown/images/icons/control/16/pencil.png" alt=""><span>Tambah Golongan Darah</span></a>
                     </li>
                 </ul>
                 <div class="clear"></div>
@@ -46,7 +46,7 @@
         
     	<!-- Dynamic table -->
         <div class="widget">
-            <div class="title"><img src="assets/tfcrown/images/icons/dark/full2.png" alt="" class="titleIcon" /><h6>Golongan Darah table</h6></div>                          
+            <div class="title"><img src="assets/tfcrown/images/icons/dark/full2.png" alt="" class="titleIcon" /><h6>Golongan Darah</h6></div>                          
             <table cellpadding="0" cellspacing="0" border="0" class="display dTable">
             <thead>
             <tr>
@@ -82,10 +82,10 @@
     
     </div>
     
-    <!-- Footer line -->
+<!--     Footer line 
     <div id="footer">
         <div class="wrapper">As usually all rights reserved. And as usually brought to you by <a href="http://themeforest.net/user/Kopyov?ref=kopyov" title="">Eugene Kopyov</a></div>
-    </div>
+    </div>-->
 
 </div>
 

@@ -15,7 +15,7 @@
     <div class="titleArea">
         <div class="wrapper">
             <div class="pageTitle">
-                <h5>Dashboard > Komponen Darah</h5>
+                <h5>Beranda > Komponen Darah</h5>
                 <span></span>
             </div>
             <div class="clear"></div>
@@ -31,7 +31,7 @@
                     <br>
                 <ul align="left">
                     <li align="left">
-                        <a href="controler?/action=comKomponenDarahEdit" title=""><img src="assets/tfcrown/images/icons/control/16/pencil.png" alt=""><span>Add New Komponen Darah</span></a>
+                        <a href="controler?/action=comKomponenDarahEdit" title=""><img src="assets/tfcrown/images/icons/control/16/pencil.png" alt=""><span>Tambah Komponen Darah</span></a>
                     </li>
                 </ul>
                 <div class="clear"></div>

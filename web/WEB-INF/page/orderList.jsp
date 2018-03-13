@@ -24,12 +24,12 @@
                 <div class="row white">
                     <br>
                         <div class="col-lg-12">
-                            <h1 class="left-oriented">List</h1>
+                            <h1 class="left-oriented">Daftar</h1>
                             <hr>
                         </div>
 
                         <div class="col-lg-12">
-                            <a href="controler?/action=orderedit" class="btn btn-info btn-lg">Add New Order</a>
+                            <a href="controler?/action=orderedit" class="btn btn-info btn-lg">Tambah Pesanan Baru</a>
                         </div>
 
                         <div class="col-lg-12">
@@ -44,7 +44,7 @@
                                         <th>TANGGAL DIGUNAKAN</th>
                                         <th>JUMLAH PERMINTAAN</th>
                                         <th>STATUS</th>
-                                        <th width="10px">ACTION</th>
+                                        <th width="10px">TINDAKAN</th>
                                     </tr>							
                                 </thead>
 
@@ -73,13 +73,27 @@
                                         <td>
                                             ${order.getOrderJmlMinta()}
                                         </td>           
+                                       <c:if test="${order.getOrderStatus() == '2'}">
+                                                
                                         <td>
-                                            ${order.getOrderStatus()}                                            
+                                            <div class="boxRedColor"></div>                                          
                                         </td>
+                                         </c:if>
+                                        <c:if test="${order.getOrderStatus() == '1'}">
+                                                
+                                        <td>
+                                            <a href="controler?/action=UbahStatusOrderII&id=${order.getOrderId()}"> <button class="boxYellowColor" style="font-size: 14px;text-align: center"  onclick="return confirm('Konfirmasi untuk menyelesaikan order ini?')">Konfirmasi</button></a>
+                                        </td>
+                                         </c:if>
+                                        <c:if test="${order.getOrderStatus() == '3'}">      
+                                        <td>
+                                            <div class="boxGreenColor"></div>                                          
+                                        </td>
+                                         </c:if>
                                         <td align="center">
                                             <a href="controler?/action=orderprint&id=${order.getOrderId()}" class="glyphicon glyphicon-print" title="Print Order"></a>
                                             <a href="controler?/action=orderedit&id=${order.getOrderId()}" class="glyphicon glyphicon-edit" title="Edit Order"></a>
-                                            <a href="controler?/action=orderdelete&id=${order.orderId}" class="glyphicon glyphicon-remove" title="Delete Order"></a>
+                                            <a href="controler?/action=orderdelete&id=${order.orderId}" class="glyphicon glyphicon-remove" title="Delete Order" onclick="return confirm('Anda yakin menghapus order ini?')"></a>
                                         </td>
                                     </tr>
                                     <%i++;%>

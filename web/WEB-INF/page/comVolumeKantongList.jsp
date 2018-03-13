@@ -15,7 +15,7 @@
     <div class="titleArea">
         <div class="wrapper">
             <div class="pageTitle">
-                <h5>Dashboard > Volume Kantong</h5>
+                <h5>Beranda > Volume Kantong</h5>
                 <span></span>
             </div>
             <div class="clear"></div>
@@ -46,7 +46,7 @@
         
     	<!-- Dynamic table -->
         <div class="widget">
-            <div class="title"><img src="assets/tfcrown/images/icons/dark/full2.png" alt="" class="titleIcon" /><h6>Dynamic table</h6></div>                          
+            <div class="title"><img src="assets/tfcrown/images/icons/dark/full2.png" alt="" class="titleIcon" /><h6>Daftar Volume Kantong Darah</h6></div>                          
             <table cellpadding="0" cellspacing="0" border="0" class="display dTable">
             <thead>
             <tr>

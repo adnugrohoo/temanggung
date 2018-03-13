@@ -15,7 +15,7 @@
             <div class="titleArea">
                 <div class="wrapper">
                     <div class="pageTitle">
-                        <h5>Dashboard > Pendonor</h5>
+                        <h5>Beranda > Pendonor</h5>
                         <span></span>
                     </div>
                     <div class="clear"></div>
@@ -46,9 +46,9 @@
 
 
             <c:if test="${message == null}">
-                <div class="nNote nInformation hideit">                                
+<!--                <div class="nNote nInformation hideit">                                
                     <p><strong>INFORMATION: </strong>Form elements. Don't forget to check all of them!</p>
-                </div>
+                </div>-->
             </c:if>
 
             <c:if test="${message == 'success'}">
@@ -70,8 +70,9 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nomor</th>
-                            <th>Name</th>
+                            <th>Nomor Pendonor</th>
+                            <th>Nomor KTP</th>
+                            <th>Nama</th>
                             <th>Jenis Kelamin</th>
                             <th>Golongan Darah</th>
                             <th>Pekerjaan</th>
@@ -89,6 +90,9 @@
                                 </td>
                                 <td>
                                     ${pendonor.getPendonorNo()}
+                                </td>
+                                <td>
+                                    ${pendonor.getNomorKTP()}
                                 </td>
                                 <td>
                                     ${pendonor.getPendonorName()}

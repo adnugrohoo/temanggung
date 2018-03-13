@@ -12,6 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
         <title>PMI Kabupaten Temanggung</title>
+        <link href="assets/css/notifikasi.css" rel="stylesheet" type="text/css" />
         <link href="assets/tfcrown/css/main.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
@@ -86,4 +87,46 @@
             });
         </script>
 
+        <style>
+            hr {
+                display: block;
+                height: 1px;
+                border: 0;
+                border-top: 1px solid #ccc;
+                margin: 1em 0;
+                padding: 0;
+            }
+            .btn {
+                background: #3498db;
+                background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+                background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+                background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+                background-image: -o-linear-gradient(top, #3498db, #2980b9);
+                background-image: linear-gradient(to bottom, #3498db, #2980b9);
+                -webkit-border-radius: 28;
+                -moz-border-radius: 28;
+                border-radius: 28px;
+                -webkit-box-shadow: 5px 5px 3px #666666;
+                -moz-box-shadow: 5px 5px 3px #666666;
+                box-shadow: 5px 5px 3px #666666;
+                font-family: Arial;
+                color: #ffffff;
+                font-size: 14px;
+                padding: 10px 20px 10px 20px;
+                border: solid #000000 0px;
+                text-decoration: none;
+                position: relative;
+                left: 60%;
+            }
+
+            .btn:hover {
+                background: #3cb0fd;
+                background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+                background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+                background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+                background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+                background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+                text-decoration: none;
+            }
+        </style>
         <!-- Shared on MafiaShare.net  --><!-- Shared on MafiaShare.net  -->

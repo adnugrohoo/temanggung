@@ -15,7 +15,7 @@
             <div class="titleArea">
                 <div class="wrapper">
                     <div class="pageTitle">
-                        <h5>Dashboard > Tambah/Edit Pendonor</h5>
+                        <h5>Beranda > Tambah/Edit Pendonor</h5>
                         <span></span>
                     </div>
                     <div class="clear"></div>
@@ -28,7 +28,7 @@
             <div class="wrapper">
 
                 <div class="nNote nInformation hideit">
-                    <p><strong>INFORMATION: </strong>Form elements were divided into 4 different pages. Don't forget to check all of them!</p>
+                    <p><strong>PERHATIAN: </strong>Isi form data pendonor ini dengan cermat</p>
                 </div> 
 
                 <!-- Validation form -->
@@ -39,7 +39,13 @@
 
                             <div class="formRow">
                                 <label>Nomor Pendonor</label>
-                                <div class="formRight"><input type="text" name="pendonorNo" disabled="disabled" value="${pendonorforedit.pendonorNo}" /></div>
+                                <div class="formRight"><input type="text" name="pendonorNo"  value="${pendonorforedit.pendonorNo}" /></div>
+                            <div class="clear"></div>
+                        </div>
+                            
+                            <div class="formRow">
+                                <label>Nomor KTP</label>
+                                <div class="formRight"><input type="text" name="pendonorKTP"  value="${pendonorforedit.nomorKTP}" /></div>
                             <div class="clear"></div>
                         </div>
 
@@ -47,6 +53,7 @@
                             <label>Nama Pendonor :<span class="req">*</span></label>
                             <div class="formRight"><input type="text" class="validate[required]" name="pendonorName" value="${pendonorforedit.pendonorName}" id="req"/></div><div class="clear"></div>
                         </div> 
+
                         <div class="formRow">
                             <label>Jenis Kelamin:<span class="req">*</span></label>
                             <div class="formRight">
@@ -110,21 +117,21 @@
                         </div>                        
                         <div class="formRow">
                             <label>Alamat:<span class="req">*</span></label>
-                            <div class="formRight"><textarea rows="8" cols="" name="pendonorAddress" value="${pendonorforedit.getPendonorAddress()}" class="validate[required]" id="textareaValid"></textarea></div><div class="clear"></div>
+                            <div class="formRight"><textarea rows="8" cols="" name="pendonorAddress" class="validate[required]" id="textareaValid">${pendonorforedit.getPendonorAddress()}</textarea></div><div class="clear"></div>
                         </div>
                         <div class="formRow">
                             <label for="labelFor">Phone:</label>
-                            <div class="formRight"><input type="text" name="pendonorTelp" class="maskPhone" value="${pendonorforedit.getPendonorTelp()}" /><span class="formNote">(999) 999-9999</span></div>
+                            <div class="formRight"><input type="text" name="pendonorTelp" class="text" value="${pendonorforedit.getPendonorTelp()}" /><span class="formNote"></span></div>
                             <div class="clear"></div>
                         </div>
-                        <div class="formRow">
+<!--                        <div class="formRow">
                             <label>Password:<span class="req">*</span></label>
                             <div class="formRight"><input type="password" class="validate[required]" name="pendonorPassword" id="password1" value="${pendonorforedit.getPendonorPassword()}" /></div><div class="clear"></div>
                         </div>
                         <div class="formRow">
                             <label>Email address:<span class="req">*</span></label>
                             <div class="formRight"><input type="text" value="${pendonorforedit.getPendonorEmail()}" class="validate[required,custom[email]]" name="pendonorEmail" id="emailValid"/></div><div class="clear"></div>
-                        </div>
+                        </div>-->
 
                         <c:if test="${pendonorforedit!=null}">
                             <div class="formSubmit"><input type="submit" formmethod="POST" formaction="controler?/action=pendonorSave&id=${pendonorforedit.pendonorId}" value="submit" class="redB" /></div>

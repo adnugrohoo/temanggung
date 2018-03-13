@@ -21,28 +21,28 @@
 
             <!-- General balance widget -->
             <div class="genBalance">
-                <a href="#" title="" class="amount">
-                    <span>Total donations : </span>
-                    <span class="balanceAmount">10K Bag</span>
+<!--                <a href="#" title="" class="amount">
+                    <span>WELCOME</span>
+                    <span class="balanceAmount">WELCOME</span>
                 </a>
                 <a href="#" title="" class="amChanges">
                     <strong class="sPositive">+0.6%</strong>
-                </a>
+                </a>-->
             </div>
 
             <div class="sidebarSep"></div>
 
             <!-- Left navigation -->
             <ul id="menu" class="nav">
-                <li class="dash"><a href="controler?/action=homeStaffPmi" title=""><span>Dashboard</span></a></li>
-                <li class="forms"><a href="#" title="" class="exp"><span>Master Data</span><strong>6</strong></a>
+                <li class="dash"><a href="controler?/action=homeStaffPmi" title=""><span>Beranda</span></a></li>
+                <li class="forms"><a href="#" title="" class="exp"><span>Master Data</span><strong>3</strong></a>
                     <ul class="sub">
                         <li><a href="controler?/action=comKomponenDarahList" title="">Data Jenis Darah</a></li>
                         <li><a href="controler?/action=comGolonganDarahList" title="">Data Golongan Darah</a></li>
                         <li><a href="controler?/action=comVolumeKantongList" title="">Data Volume Kantong</a></li>
-                        <li><a href="controler?/action=comJaminanList" title="">Data Jaminan</a></li>
+<!--                        <li><a href="controler?/action=comJaminanList" title="">Data Jaminan</a></li>
                         <li><a href="controler?/action=comKecamatanList" title="">Data Kecamatan</a></li>
-                        <li class="last"><a href="" title="">Data Pekerjaan</a></li>
+                        <li class="last"><a href="" title="">Data Pekerjaan</a></li>-->
                     </ul>
                 </li>
                 <li class="ui"><a href="controler?/action=pendonorList" title=""><span>Data Pendonor</span></a></li>
@@ -52,11 +52,11 @@
                         <li class="last"><a href="controler?/action=aftapList" title="">Pengambilan Darah</a></li>
                     </ul>
                 </li>
-                <li class="widgets"><a href="#" title="" class="exp"><span>Pengolahan Darah</span><strong>3</strong></a>
+                <li class="widgets"><a href="#" title="" class="exp"><span>Pengolahan Darah</span><strong>2</strong></a>
                     <ul class="sub">
                         <li><a href="controler?/action=screeningList" title="">Data Screening</a></li>
                         <li><a href="controler?/action=komponenList" title="">Data Komponen</a></li>
-                        <li class="last"><a href="controler?/action=pmiCrossList" title="">Data Cross Match</a></li>
+<!--                        <li class="last"><a href="controler?/action=pmiCrossList" title="">Data Cross Match</a></li>-->
                     </ul>
                 </li>
                 <li class="files"><a href="#" title="" class="exp"><span>Permintaan Darah</span><strong>2</strong></a>
@@ -65,7 +65,7 @@
                         <li class="last"><a href="controler?/action=komponenList" title="">Permintaan Darah (Dropping)</a></li>
                     </ul>
                 </li>
-                <li class="ui"><a href="ui_elements.html" title=""><span>Account</span></a></li>
+                <li class="ui"><a href="ui_elements.html" title=""><span>Kontak Kami</span></a></li>
             </ul>
         </div>
     </body>
