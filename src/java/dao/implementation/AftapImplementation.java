@@ -368,12 +368,16 @@ public class AftapImplementation implements AftapDao {
                 ComVolumeKantong oComVolumeKantong;
                 ComVolumeKantongDao comVolumeKantongDao = ConnectionMySQL.getComVolumeKantongDao();
                 oComVolumeKantong = comVolumeKantongDao.selectComVolumeKantongById(resultSet.getInt("comVolumeKantongId"));
-
+                Pendonor pendonor;
+                PendonorDao pendonorDao = ConnectionMySQL.getPendonorDao();
+                pendonor = pendonorDao.selectPendonorById(resultSet.getInt("pendonorId"));
+                
                 oAftap.setComVolumeKantong(oComVolumeKantong);
                 oAftap.setAftapNoKantong(resultSet.getString("aftapNoKantong"));
                 oAftap.setAftapTanggal(resultSet.getString("aftapTanggal"));
                 oAftap.setAftapStatusAmbil(resultSet.getString("aftapStatusAmbil"));
                 oAftap.setAftapReaksi(resultSet.getString("aftapReaksi"));
+                oAftap.setPendonor(pendonor);
 
             }
 

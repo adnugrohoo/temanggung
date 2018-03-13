@@ -24,6 +24,7 @@ public class Order {
     private String orderJmlMinta;
     private String orderJenisPermintaan;
     private String orderStatus;
+    private Komponen orderKomponenDarah;
     private Hospital hospital;
     private Patient patient;
     private Docter docter;
@@ -39,6 +40,14 @@ public class Order {
     
     public void setOrderId(Integer pOrderId){
         this.orderId = pOrderId;
+    }
+    
+    public Komponen getOrderKomponenDarah() {
+        return orderKomponenDarah;
+    }
+
+    public void setOrderKomponenDarah(Komponen pKomponenDarah) {
+        this.orderKomponenDarah = pKomponenDarah;
     }
     
     public String getOrderNo(){

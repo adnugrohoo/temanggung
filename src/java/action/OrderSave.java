@@ -3,6 +3,7 @@ package action;
 import dao.OrderDao;
 import entity.Docter;
 import entity.Hospital;
+import entity.Komponen;
 import entity.Order;
 import entity.Patient;
 //import entity.Category;
@@ -40,23 +41,60 @@ public class OrderSave implements ActionInterface {
                     String id = request.getParameter("id");
 
                     String sOrderNo = request.getParameter("orderNo");
-                    String sOrderPatient = request.getParameter("orderPatient");
-                    String sOrderDocter = request.getParameter("orderDocter");
-                    String sOrderTanggal = request.getParameter("orderTanggal");
+//                    String sOrderPatient = request.getParameter("orderPatient");
+//                    String sOrderDocter = request.getParameter("orderDocter");
+                    String[] splitPatient = request.getParameter("orderPatient").split("/");
+                    String sOrderPatient = splitPatient[0];
+                    String[] splitDocter = request.getParameter("orderDocter").split("/");
+                    String sOrderDocter = splitDocter[0];
+
+                    String sOrderTanggal;
+                    String OrderTanggal = request.getParameter("orderTanggal");
+                    if (OrderTanggal.length() == 1) {
+                        OrderTanggal = "0" + request.getParameter("orderTanggal");
+                    }
+                    String OrderBulan = request.getParameter("orderBulan");
+                    String OrderTahun = request.getParameter("orderTahun");
+                    sOrderTanggal = OrderTahun + "-" + OrderBulan + "-" + OrderTanggal;
                     String sOrderNoKartu = request.getParameter("orderNoKartu");
                     String sOrderHb = request.getParameter("orderHb");
                     String sOrderDiagnosa = request.getParameter("orderDiagnosa");
+                    String sOrderKomponenDarah = request.getParameter("orderKomponenDarah");
                     String sOrderKelas = request.getParameter("orderKelas");
                     String sOrderBangsal = request.getParameter("orderBangsal");
-                    String sOrderTanggalMasuk = request.getParameter("orderTanggalMasuk");
-                    String sOrderTanggalDigunakan = request.getParameter("orderTanggalDigunakan");
-                    String sOrderJmlMinta = request.getParameter("orderJmlMinta");
+                    String sOrderTanggalMasuk;
+                    String OrderTanggalMasuk = request.getParameter("orderTanggalMasuk");
+                    if (OrderTanggalMasuk.length() == 1) {
+                        OrderTanggalMasuk = "0" + request.getParameter("orderTanggalMasuk");
+                    }
+                    String OrderBulanMasuk = request.getParameter("orderBulanMasuk");
+                    String OrderTahunMasuk = request.getParameter("orderTahunMasuk");
+                    sOrderTanggalMasuk = OrderTahunMasuk + "-" + OrderBulanMasuk + "-" + OrderTanggalMasuk;
+                    String sOrderTanggalDigunakan;
+                    String OrderTanggalDigunakan = request.getParameter("orderTanggalDigunakan");
+                    if (OrderTanggalDigunakan.length() == 1) {
+                        OrderTanggalDigunakan = "0" + request.getParameter("orderTanggalDigunakan");
+                    }
+                    String OrderBulanDigunakan = request.getParameter("orderBulanDigunakan");
+                    String OrderTahunDigunakan = request.getParameter("orderTahunDigunakan");
+                    sOrderTanggalDigunakan = OrderTahunDigunakan + "-" + OrderBulanDigunakan + "-" + OrderTanggalDigunakan;
+//                    String sOrderJmlMinta = request.getParameter("orderJmlMinta");
+                    String[] sOrderJmlMintaKantong = request.getParameterValues("textKantong");
+                    String[] sOrderJmlMintaCC = request.getParameterValues("textCC");
+
+                    String sOrderJmlMinta = "";
+                    for (int i = 0; i < sOrderJmlMintaCC.length; i++) {
+                        sOrderJmlMinta = sOrderJmlMinta + sOrderJmlMintaKantong[i] + "," + sOrderJmlMintaCC[i] + ";";
+                    }
 
                     Order order = new Order();
                     Patient oPatient = new Patient();
                     Docter oDocter = new Docter();
+                    Komponen oKomp = new Komponen();
+                    
                     oPatient.setPatientId(Integer.parseInt(sOrderPatient));
                     oDocter.setDocterId(Integer.parseInt(sOrderDocter));
+                    oKomp.setKomponenId(Integer.parseInt(sOrderKomponenDarah));
 
                     order.setOrderNo(sOrderNo);
                     order.setOrderTanggal(sOrderTanggal);
@@ -68,6 +106,7 @@ public class OrderSave implements ActionInterface {
                     order.setOrderTanggalMasuk(sOrderTanggalMasuk);
                     order.setOrderTanggalDigunakan(sOrderTanggalDigunakan);
                     order.setOrderJmlMinta(sOrderJmlMinta);
+                    order.setOrderKomponenDarah(oKomp);
                     order.setHospital(administrator);
                     order.setPatient(oPatient);
                     order.setDocter(oDocter);

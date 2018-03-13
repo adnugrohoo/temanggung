@@ -20,6 +20,8 @@ public interface DocterDao {
 
     public void delete(Integer pDocterId);
 
+    public List<String> selectOne(String name);
+    
     public List<Docter> selectAll() throws Exception;
 
     public Integer getNoOfRecords() throws Exception;

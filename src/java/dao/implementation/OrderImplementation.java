@@ -6,14 +6,18 @@
 package dao.implementation;
 
 import com.dao.ComGolonganDarahDao;
+import com.dao.ComKomponenDarahDao;
 import com.entity.ComGolonganDarah;
+import com.entity.ComKomponenDarah;
 import dao.DocterDao;
 import dao.OrderDao;
 import dao.HospitalDao;
+import dao.KomponenDao;
 import dao.PatientDao;
 import entity.Docter;
 import entity.Order;
 import entity.Hospital;
+import entity.Komponen;
 import entity.Patient;
 import java.awt.Cursor;
 import java.awt.Desktop;
@@ -25,7 +29,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -81,6 +88,8 @@ public class OrderImplementation implements OrderDao {
                     + "orderTanggalMasuk = ?, "
                     + "orderTanggalDigunakan = ?, "
                     + "orderJmlMinta = ?, "
+                    + "comKomponenDarahId = ?, "
+                    + "orderStatus = ?, "
                     + "patientId = ?, "
                     + "docterId = ?, "
                     + "hospitalId=?;";
@@ -97,9 +106,11 @@ public class OrderImplementation implements OrderDao {
             statement.setString(8, pOrder.getOrderTanggalMasuk());
             statement.setString(9, pOrder.getOrderTanggalDigunakan());
             statement.setString(10, pOrder.getOrderJmlMinta());
-            statement.setInt(11, pOrder.getPatient().getPatientId());
-            statement.setInt(12, pOrder.getDocter().getDocterId());
-            statement.setInt(13, pOrder.getHospital().getHospitalId());
+            statement.setInt(11, pOrder.getOrderKomponenDarah().getKomponenId());
+            statement.setString(12, "2");
+            statement.setInt(13, pOrder.getPatient().getPatientId());
+            statement.setInt(14, pOrder.getDocter().getDocterId());
+            statement.setInt(15, pOrder.getHospital().getHospitalId());
 
             System.out.println(statement.toString());
             statement.executeUpdate();
@@ -136,14 +147,37 @@ public class OrderImplementation implements OrderDao {
         try {
             connection.setAutoCommit(false);
 
-            String sql = "UPDATE order SET orderName = ?, orderAddress = ?, orderTelp = ? WHERE orderId = ?;";
+            String sql = "UPDATE torder SET orderNo = ?, "
+                    + "orderTanggal = ?, "
+                    + "orderNoKartu = ?, "
+                    + "orderHb = ?, "
+                    + "orderDiagnosa = ?, "
+                    + "orderKelas = ?, "
+                    + "orderBangsal = ?, "
+                    + "orderTanggalMasuk = ?, "
+                    + "orderTanggalDigunakan = ?, "
+                    + "orderJmlMinta = ?, "
+                    + "patientId = ?, "
+                    + "docterId = ?, "
+                    + "hospitalId = ? WHERE orderId = ?";
 
             statement = connection.prepareStatement(sql);
 
-//            statement.setString(1, pOrder.getOrderName());
-//            statement.setString(2, pOrder.getOrderAddress());
-//            statement.setString(3, pOrder.getOrderTelp());
-            statement.setInt(4, pOrder.getOrderId());
+            statement.setString(1, pOrder.getOrderNo());
+            statement.setString(2, pOrder.getOrderTanggal());
+            statement.setString(3, pOrder.getOrderNoKartu());
+            statement.setString(4, pOrder.getOrderHb());
+            statement.setString(5, pOrder.getOrderDiagnosa());
+            statement.setString(6, pOrder.getOrderKelas());
+            statement.setString(7, pOrder.getOrderBangsal());
+            statement.setString(8, pOrder.getOrderTanggalMasuk());
+            statement.setString(9, pOrder.getOrderTanggalDigunakan());
+            statement.setString(10, pOrder.getOrderJmlMinta());
+            statement.setInt(11, pOrder.getPatient().getPatientId());
+            statement.setInt(12, pOrder.getDocter().getDocterId());
+            statement.setInt(13, pOrder.getHospital().getHospitalId());
+
+            statement.setInt(14, pOrder.getOrderId());
 
             System.out.println(statement.toString());
             statement.executeUpdate();
@@ -179,7 +213,7 @@ public class OrderImplementation implements OrderDao {
         try {
             connection.setAutoCommit(false);
 
-            String sql = "DELETE FROM order WHERE orderId = ?";
+            String sql = "DELETE FROM torder WHERE orderId = ?";
 
             statement = connection.prepareStatement(sql);
             statement.setInt(1, pOrderId);
@@ -229,7 +263,7 @@ public class OrderImplementation implements OrderDao {
             String sql = "SELECT * \n"
                     + "FROM torder o INNER JOIN patient p ON o.patientId=p.patientId \n"
                     + "INNER JOIN comGolonganDarah g ON p.comGolonganDarahId=g.comGolonganDarahId \n"
-                    + "ORDER BY orderId;";
+                    + "ORDER BY o.orderTanggal desc";
             System.out.println(sql);
 
             statement = connection.prepareStatement(sql);
@@ -311,7 +345,7 @@ public class OrderImplementation implements OrderDao {
 
             String sql = "SELECT * \n"
                     + "FROM torder o INNER JOIN patient p ON o.patientId=p.patientId\n"
-                    + "ORDER BY orderId LIMIT " + offset + "," + noOfRecords + ";";
+                    + "ORDER BY o.orderStatus, o.orderTanggal DESC LIMIT " + offset + "," + noOfRecords + ";";
 
             System.out.println(sql);
 
@@ -432,6 +466,160 @@ public class OrderImplementation implements OrderDao {
     }
 
     @Override
+    public boolean cekStatusOrder() {
+        boolean cek = false;
+        try {
+
+            connection.setAutoCommit(false);
+
+            String sql = "SELECT o.orderstatus \n"
+                    + "FROM torder o INNER JOIN patient p ON o.patientId=p.patientId \n"
+                    + "INNER JOIN comGolonganDarah g ON p.comGolonganDarahId=g.comGolonganDarahId where o.orderstatus='2'";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                cek = true;
+                return cek;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cek;
+    }
+
+    @Override
+    public void updateStatusOrderI(int orderId) {
+        PreparedStatement statement;
+        statement = null;
+        try {
+            connection.setAutoCommit(false);
+
+            String sql = "UPDATE torder SET orderStatus = '1' WHERE orderId = ?";
+
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, orderId);
+            statement.executeUpdate();
+            connection.commit();
+        } catch (SQLException e) {
+            try {
+                try {
+                    connection.rollback();
+                } catch (SQLException ex) {
+                }
+                throw new Exception(e.getMessage());
+            } catch (Exception ex) {
+                Logger.getLogger(OrderImplementation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException e) {
+            }
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                }
+            }
+        }
+    }
+
+    @Override
+    public void updateStatusOrderII(int orderId) {
+        PreparedStatement statement;
+        statement = null;
+        try {
+            connection.setAutoCommit(false);
+
+            String sql = "UPDATE torder SET orderStatus = '3' WHERE orderId = ?;";
+            
+            statement = connection.prepareStatement(sql);
+            statement.setInt(1, orderId);
+            statement.executeUpdate();
+            connection.commit();
+        } catch (SQLException e) {
+            try {
+                try {
+                    connection.rollback();
+                } catch (SQLException ex) {
+                }
+                throw new Exception(e.getMessage());
+            } catch (Exception ex) {
+                Logger.getLogger(OrderImplementation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } finally {
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException e) {
+            }
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                }
+            }
+        }
+    }
+
+    @Override
+    public List<Order> tampilOrderStatusBelum() {
+
+        try {
+            List<Order> listOrderBelum = new ArrayList<>();
+            connection.setAutoCommit(false);
+
+            String sql = "SELECT * \n"
+                    + "FROM torder o INNER JOIN patient p ON o.patientId=p.patientId \n"
+                    + "INNER JOIN comGolonganDarah g ON p.comGolonganDarahId=g.comGolonganDarahId where o.orderstatus='2' ORDER BY o.orderTanggal DESC";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Order order = new Order();
+
+                Hospital oHospital;
+                Patient oPatient = new Patient();
+                Docter oDocter = new Docter();
+
+                HospitalDao hospitalDao = ConnectionMySQL.getHospitalDao();
+                PatientDao patientDao = ConnectionMySQL.getPatientDao();
+                DocterDao docterDao = ConnectionMySQL.getDocterDao();
+
+                oHospital = hospitalDao.selectHospitalById(resultSet.getInt("hospitalId"));
+                oPatient = patientDao.selectPatientById(resultSet.getInt("patientId"));
+                oDocter = docterDao.selectDocterById(10);
+
+                order.setHospital(oHospital);
+                order.setOrderId(resultSet.getInt("orderId"));
+                order.setOrderNo(resultSet.getString("orderNo"));
+                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                order.setOrderTanggal(sdf.format(resultSet.getDate("orderTanggal")));
+                order.setOrderNoKartu(resultSet.getString("orderNoKartu"));
+                order.setOrderHb(resultSet.getString("orderHb"));
+                order.setOrderDiagnosa(resultSet.getString("orderDiagnosa"));
+                order.setOrderKelas(resultSet.getString("orderKelas"));
+                order.setOrderBangsal(resultSet.getString("orderBangsal"));
+                order.setOrderTanggalMasuk(resultSet.getString("orderTanggalMasuk"));
+                order.setOrderTanggalDigunakan(resultSet.getString("orderTanggalDigunakan"));
+                order.setOrderJmlMinta(resultSet.getString("orderJmlMinta"));
+                order.setOrderJenisPermintaan(resultSet.getString("orderJenisPermintaan"));
+                order.setOrderStatus(resultSet.getString("orderStatus"));
+                order.setPatient(oPatient);
+                order.setDocter(oDocter);
+
+                listOrderBelum.add(order);
+            }
+            connection.setAutoCommit(false);
+            connection.commit();
+            return listOrderBelum;
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(OrderImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    @Override
     public Order getOrderById(Integer id) throws Exception {
         PreparedStatement statement;
         ResultSet resultSet;
@@ -449,7 +637,7 @@ public class OrderImplementation implements OrderDao {
 
             statement = connection.prepareStatement(sql);
             resultSet = statement.executeQuery();
-            while (resultSet.next()) {
+            if (resultSet.next()) {
                 order = new Order();
 
                 order.setOrderId(resultSet.getInt("orderId"));
@@ -461,13 +649,32 @@ public class OrderImplementation implements OrderDao {
                 Patient oPatient = new Patient();
                 PatientDao patientDao = ConnectionMySQL.getPatientDao();
                 oPatient = patientDao.getPatientById(resultSet.getInt("patientId"));
-
+                Docter oDocter = new Docter();
+                DocterDao docterDao = ConnectionMySQL.getDocterDao();
+                oDocter = docterDao.getDocterById(resultSet.getInt("docterId"));
                 order.setPatient(oPatient);
+                order.setDocter(oDocter);
+                Komponen komponen = new Komponen();
+                KomponenDao komponenDao = ConnectionMySQL.getKomponenDao();
+                komponen = komponenDao.getKomponenById(resultSet.getInt("comKomponenDarahId"));
+                order.setOrderKomponenDarah(komponen);
+                System.out.println(order.getOrderKomponenDarah().getComKomponenDarah().getComKomponenDarahName());
+
+                order.setOrderId(resultSet.getInt("orderId"));
                 order.setOrderNo(resultSet.getString("orderNo"));
                 order.setOrderTanggal(resultSet.getString("orderTanggal"));
-//                order.setOrderName(resultSet.getString("orderName"));
-//                order.setOrderAddress(resultSet.getString("orderAddress"));
-//                order.setOrderTelp(resultSet.getString("orderTelp"));
+                order.setOrderNoKartu(resultSet.getString("orderNoKartu"));
+                order.setOrderHb(resultSet.getString("orderHb"));
+                order.setOrderDiagnosa(resultSet.getString("orderDiagnosa"));
+                order.setOrderKelas(resultSet.getString("orderKelas"));
+                order.setOrderBangsal(resultSet.getString("orderBangsal"));
+                order.setOrderTanggalMasuk(resultSet.getString("orderTanggalMasuk"));
+                order.setOrderTanggalDigunakan(resultSet.getString("orderTanggalDigunakan"));
+                order.setOrderJmlMinta(resultSet.getString("orderJmlMinta"));
+                order.setOrderJenisPermintaan(resultSet.getString("orderJenisPermintaan"));
+                order.setOrderStatus(resultSet.getString("orderStatus"));
+//                
+
             }
             connection.setAutoCommit(false);
             connection.commit();
@@ -640,4 +847,33 @@ public class OrderImplementation implements OrderDao {
 //        } catch (Exception e) {
 //        }
 //    }
+    @Override
+    public String kodeOrderOtomatis() {
+        String id = "";
+        Date dNow = new Date();
+        SimpleDateFormat ft = new SimpleDateFormat("yyyy/MM/dd");
+        try {
+            Statement stat = connection.createStatement();
+            String sql = "Select max(cast(substr(orderNo,2) as int)) as max_id from torder";
+            ResultSet rs = stat.executeQuery(sql);
+            int idInt;
+            while (rs.next()) {
+                String idOrderDb = rs.getString("max_id");
+                int idOrderInt = Integer.parseInt(idOrderDb);
+                if (idOrderDb == null) {
+                    idInt = 1;
+                    id = "O0" + String.valueOf(idInt) + "," + ft.format(dNow);
+                } else if (idOrderInt > 1 && idOrderInt < 9) {
+                    id = "O0" + String.valueOf(idOrderInt + 1) + "," + ft.format(dNow);
+                } else {
+                    idInt = Integer.parseInt(idOrderDb) + 1;
+                    id = "O" + String.valueOf(idInt) + "," + ft.format(dNow);
+                }
+            }
+            return id;
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
 }

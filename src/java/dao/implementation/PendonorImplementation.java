@@ -15,7 +15,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,6 +45,7 @@ public class PendonorImplementation implements PendonorDao {
             String sql = "INSERT INTO pendonor SET "
                     + "pendonorNo = ?, "
                     + "pendonorName = ?,"
+                    + "nomorKTP = ?,"
                     + "pendonorGender = ?, "
                     + "pendonorBirthPlace = ?, "
                     + "pendonorBirthDate = ?, "
@@ -58,15 +61,16 @@ public class PendonorImplementation implements PendonorDao {
 
             statement.setString(1, pPendonor.getPendonorNo());
             statement.setString(2, pPendonor.getPendonorName());
-            statement.setString(3, pPendonor.getPendonorGender());
-            statement.setString(4, pPendonor.getPendonorBirthPlace());
-            statement.setString(5, pPendonor.getPendonorBirthDate());
-            statement.setString(6, pPendonor.getPendonorAddress());
-            statement.setString(7, pPendonor.getPendonorTelp());
-            statement.setString(8, pPendonor.getPendonorEmail());
-            statement.setString(9, pPendonor.getPendonorPassword());
-            statement.setInt(10, pPendonor.getComPekerjaan().getComPekerjaanId());
-            statement.setInt(11, pPendonor.getComGolonganDarah().getComGolonganDarahId());
+            statement.setString(3, pPendonor.getNomorKTP());
+            statement.setString(4, pPendonor.getPendonorGender());
+            statement.setString(5, pPendonor.getPendonorBirthPlace());
+            statement.setString(6, pPendonor.getPendonorBirthDate());
+            statement.setString(7, pPendonor.getPendonorAddress());
+            statement.setString(8, pPendonor.getPendonorTelp());
+            statement.setString(9, pPendonor.getPendonorEmail());
+            statement.setString(10, pPendonor.getPendonorPassword());
+            statement.setInt(11, pPendonor.getComPekerjaan().getComPekerjaanId());
+            statement.setInt(12, pPendonor.getComGolonganDarah().getComGolonganDarahId());
 
             System.out.println(statement.toString());
             statement.executeUpdate();
@@ -217,6 +221,7 @@ public class PendonorImplementation implements PendonorDao {
             String sql = "SELECT A.pendonorId, "
                     + "A.pendonorNo, "
                     + "A.pendonorName, "
+                    + "A.NomorKTP, "
                     + "A.pendonorGender, "
                     + "A.pendonorAddress, "
                     + "A.pendonorBirthPlace, "
@@ -249,6 +254,7 @@ public class PendonorImplementation implements PendonorDao {
                 oPendonor.setComGolonganDarah(oComGolonganDarah);
                 oPendonor.setPendonorNo(resultSet.getString("pendonorNo"));
                 oPendonor.setPendonorName(resultSet.getString("pendonorName"));
+                oPendonor.setNomorKTP(resultSet.getString("nomorKTP"));
                 oPendonor.setPendonorGender(resultSet.getString("pendonorGender"));
                 oPendonor.setPendonorBirthPlace(resultSet.getString("pendonorBirthPlace"));
                 oPendonor.setPendonorBirthDate(resultSet.getString("pendonorBirthDate"));
@@ -394,7 +400,10 @@ public class PendonorImplementation implements PendonorDao {
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 oPendonor = new Pendonor();
-
+                ComGolonganDarah comGolonganDarah;
+                ComGolonganDarahDao comGolonganDarahDao = ConnectionMySQL.getComGolonganDarahDao();
+                comGolonganDarah = comGolonganDarahDao.selectComGolonganDarahById(resultSet.getInt("comGolonganDarahId"));
+                
                 oPendonor.setPendonorId(resultSet.getInt("pendonorId"));
 
                 oPendonor.setPendonorNo(resultSet.getString("pendonorNo"));
@@ -406,7 +415,7 @@ public class PendonorImplementation implements PendonorDao {
                 oPendonor.setPendonorTelp(resultSet.getString("pendonorTelp"));
                 oPendonor.setPendonorEmail(resultSet.getString("pendonorEmail"));
                 oPendonor.setPendonorPassword(resultSet.getString("pendonorPassword"));
-
+                oPendonor.setComGolonganDarah(comGolonganDarah);
             }
 
             connection.setAutoCommit(false);
@@ -445,7 +454,7 @@ public class PendonorImplementation implements PendonorDao {
             connection.setAutoCommit(false);
 
             String sql = "SELECT * FROM pendonor "
-                    + "WHERE pendonorId = " + id + ";";
+                    + "WHERE pendonorId = " + id ;
 
             System.out.println(sql);
             Pendonor oPendonor = null;
@@ -470,9 +479,12 @@ public class PendonorImplementation implements PendonorDao {
                 oPendonor.setComPekerjaan(oComPekerjaan);
                 oPendonor.setPendonorNo(resultSet.getString("pendonorNo"));
                 oPendonor.setPendonorName(resultSet.getString("pendonorName"));
+                oPendonor.setNomorKTP(resultSet.getString("nomorKTP"));
                 oPendonor.setPendonorGender(resultSet.getString("pendonorGender"));
                 oPendonor.setPendonorBirthPlace(resultSet.getString("pendonorBirthPlace"));
-                oPendonor.setPendonorBirthDate(resultSet.getString("pendonorBirthDate"));
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                String date = sdf.format(resultSet.getDate("pendonorBirthDate"));
+                oPendonor.setPendonorBirthDate(date);
                 oPendonor.setPendonorAddress(resultSet.getString("pendonorAddress"));
                 oPendonor.setPendonorTelp(resultSet.getString("pendonorTelp"));
                 oPendonor.setPendonorEmail(resultSet.getString("pendonorEmail"));

@@ -190,7 +190,7 @@ public class KomponenImplementation implements KomponenDao {
             String sql = "SELECT A.komponenId, \n"
                     + "A.komponenNo, \n"
                     + "A.komponenTanggal, \n"
-                    + "B.aftapId, \n"
+                    + "a.aftapId, \n"
                     + "ckd.comKomponenDarahId \n"
                     + "FROM Komponen AS A INNER JOIN Aftap AS B ON A.aftapId = B.aftapId \n"
                     + "INNER JOIN comKomponenDarah ckd ON ckd.comKomponenDarahId=a.comKomponenDarahId";
@@ -212,6 +212,7 @@ public class KomponenImplementation implements KomponenDao {
                 oComKomponenDarah = comKomponenDarahDao.selectComKomponenDarahById(resultSet.getInt("comKomponenDarahId"));
 
                 oKomponen.setAftap(oAftap);
+//                System.out.println(oKomponen.getAftap().getPendonor().getComGolonganDarah().getComGolonganDarahName());
                 oKomponen.setComKomponenDarah(oComKomponenDarah);
                 oKomponen.setKomponenNo(resultSet.getString("komponenNo"));
                 oKomponen.setKomponenTanggal(resultSet.getString("komponenTanggal"));
@@ -274,10 +275,13 @@ public class KomponenImplementation implements KomponenDao {
                 Aftap oAftap;
                 AftapDao aftapDao = ConnectionMySQL.getAftapDao();
                 oAftap = aftapDao.selectAftapById(resultSet.getInt("aftapId"));
-
+                ComKomponenDarah comKomponenDarah;
+                ComKomponenDarahDao comKomponenDarahDao = ConnectionMySQL.getComKomponenDarahDao();
+                comKomponenDarah = comKomponenDarahDao.getComKomponenDarahById(resultSet.getInt("comKomponenDarahId"));
                 oKomponen.setAftap(oAftap);
                 oKomponen.setKomponenNo(resultSet.getString("komponenNo"));
                 oKomponen.setKomponenTanggal(resultSet.getString("komponenTanggal"));
+                oKomponen.setComKomponenDarah(comKomponenDarah);
 
             }
             connection.setAutoCommit(false);

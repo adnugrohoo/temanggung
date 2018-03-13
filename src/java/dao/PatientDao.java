@@ -20,6 +20,10 @@ public interface PatientDao {
 
     public void delete(Integer pPatientId);
 
+    public String kodeOtomatis();
+    
+    public List<String> selectOne(String name); 
+    
     public List<Patient> selectAll() throws Exception;
 
     public Integer getNoOfRecords() throws Exception;

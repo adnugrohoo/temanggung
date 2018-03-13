@@ -155,6 +155,43 @@ public class DocterImplementation implements DocterDao {
         }
     }
 
+    public List<String> selectOne(String name) {
+        try {
+            PreparedStatement statement;
+            ResultSet resultSet;
+            statement = null;
+            resultSet = null;
+
+            String namaDokter = "";
+            name = name.toLowerCase();
+            List<String> matched = new ArrayList<String>();
+
+            connection.setAutoCommit(false);
+
+            String sql = "SELECT * "
+                    + "FROM docter"
+                    + ";";
+            
+
+            statement = connection.prepareStatement(sql);
+            resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                namaDokter = resultSet.getString("docterName").toLowerCase();
+                
+                if (namaDokter.startsWith(name)) {
+                    matched.add(resultSet.getString("docterId")+"/"+resultSet.getString("docterName"));
+                }
+            }
+
+            connection.setAutoCommit(false);
+            connection.commit();
+            return matched;
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
     /**
      *
      * @return @throws Exception

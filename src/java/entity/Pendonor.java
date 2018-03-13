@@ -18,6 +18,7 @@ public class Pendonor {
     private Integer pendonorId;
     private String pendonorNo;
     private String pendonorName;
+    private String nomorKTP;
     private String pendonorGender;
     private String pendonorBirthPlace;
     private String pendonorBirthDate;
@@ -53,6 +54,16 @@ public class Pendonor {
         return this.pendonorName;
     }
 
+    public String getNomorKTP() {
+        return nomorKTP;
+    }
+
+    public void setNomorKTP(String nomorKTP) {
+        this.nomorKTP = nomorKTP;
+    }
+
+    
+    
     public void setPendonorName(String pPendonorName) {
         this.pendonorName = pPendonorName;
     }

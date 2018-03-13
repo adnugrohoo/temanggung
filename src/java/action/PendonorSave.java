@@ -45,8 +45,9 @@ public class PendonorSave implements ActionInterface {
 
                     String sPendonorNo = request.getParameter("pendonorNo");
                     String sPendonorName = request.getParameter("pendonorName");
+                    String sPendonorKTP = request.getParameter("pendonorKTP");
                     String sPendonorBirthPlace = request.getParameter("pendonorBirthPlace");
-                    String pPendonorBirthDate = request.getParameter("pendonorDate");
+                    String pPendonorBirthDate = request.getParameter("pendonorBirthDate");
                     String pPendonorGender = request.getParameter("pendonorGender");
                     String pPendonorAddress = request.getParameter("pendonorAddress");
                     String pPendonorTelp = request.getParameter("pendonorTelp");
@@ -65,6 +66,7 @@ public class PendonorSave implements ActionInterface {
 
                     oPendonor.setPendonorNo(sPendonorNo);
                     oPendonor.setPendonorName(sPendonorName);
+                    oPendonor.setNomorKTP(sPendonorKTP);
                     oPendonor.setPendonorBirthPlace(sPendonorBirthPlace);
                     oPendonor.setPendonorBirthDate(pPendonorBirthDate);
                     oPendonor.setPendonorGender(pPendonorGender);

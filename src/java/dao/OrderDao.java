@@ -20,14 +20,24 @@ public interface OrderDao {
 
     public void delete(Integer pOrderId);
 
+    public String kodeOrderOtomatis();
+
     public List<Order> selectAll() throws Exception;
 
     public Integer getNoOfRecords() throws Exception;
-    
+
+    public boolean cekStatusOrder();
+
+    public void updateStatusOrderI(int id);
+
+    public void updateStatusOrderII(int id);
+
+    public List<Order> tampilOrderStatusBelum();
+
     public Order getOrderById(Integer id) throws Exception;
-    
+
     public List<Order> selectAllWithLimit(int offset, int noOfRecords) throws Exception;
-    
+
     public void print(String pOrderId);
 //    public void print(Integer pOrderId);
 }

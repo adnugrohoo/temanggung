@@ -14,6 +14,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -47,8 +48,6 @@ public class PatientImplementation implements PatientDao {
                     + ";";
 
             statement = connection.prepareStatement(sql);
-            
-            
 
             statement.setString(1, pPatient.getPatientNo());
             statement.setString(2, pPatient.getPatientName());
@@ -84,7 +83,7 @@ public class PatientImplementation implements PatientDao {
 
     @Override
     public void update(Patient pPatient) {
-        
+
         PreparedStatement statement;
         statement = null;
         try {
@@ -165,6 +164,71 @@ public class PatientImplementation implements PatientDao {
         }
     }
 
+    @Override
+    public String kodeOtomatis() {
+        String id = "";
+        try {
+            Statement stat = connection.createStatement();
+            String sql = "Select max(cast(substr(patientNo,2) as int)) as max_id from patient";
+            ResultSet rs = stat.executeQuery(sql);
+            int idInt;
+            while (rs.next()) {
+                String idPatientDb = rs.getString("max_id");
+                int idPatientInt = Integer.parseInt(idPatientDb);
+                if (idPatientDb == null) {
+                    idInt = 1;
+                    id = "P0" + String.valueOf(idInt);
+                } else if (idPatientInt > 1 && idPatientInt < 9) {
+                    id = "P0" + String.valueOf(idPatientInt + 1);
+                } else {
+                    idInt = Integer.parseInt(idPatientDb) + 1;
+                    id = "P" + String.valueOf(idInt);
+                }
+            }
+            return id;
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
+    }
+
+    @Override
+    public List<String> selectOne(String name) {
+        try {
+            PreparedStatement statement;
+            ResultSet resultSet;
+            statement = null;
+            resultSet = null;
+
+            String namePatient = "";
+            name = name.toLowerCase();
+            List<String> matched = new ArrayList<String>();
+
+            connection.setAutoCommit(false);
+
+            String sql = "SELECT * "
+                    + "FROM patient p INNER JOIN comGolonganDarah cgd ON p.comGolonganDarahId = cgd.comGolonganDarahId"
+                    + ";";
+
+            statement = connection.prepareStatement(sql);
+            resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                namePatient = resultSet.getString("patientName").toLowerCase();
+
+                if (namePatient.startsWith(name)) {
+                    matched.add(resultSet.getString("patientId") + "/" + resultSet.getString("patientName") + "/" + resultSet.getString("patientNo"));
+                }
+            }
+
+            connection.setAutoCommit(false);
+            connection.commit();
+            return matched;
+        } catch (SQLException ex) {
+            Logger.getLogger(PatientImplementation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
     /**
      *
      * @return @throws Exception
@@ -181,8 +245,8 @@ public class PatientImplementation implements PatientDao {
             connection.setAutoCommit(false);
 
             String sql = "SELECT * "
-                    + "FROM patient p INNER JOIN comGolonganDarah cgd ON p.comGolonganDarahId = cgd.comGolonganDarahId"
-                    + ";";
+                    + "FROM patient p INNER JOIN comGolonganDarah cgd ON p.comGolonganDarahId = cgd.comGolonganDarahId "
+                    + "order by patientId DESC";
             System.out.println(sql);
 
             statement = connection.prepareStatement(sql);
@@ -193,7 +257,7 @@ public class PatientImplementation implements PatientDao {
                 ComGolonganDarah oComGolonganDarah;
                 ComGolonganDarahDao comGolonganDarahDao = ConnectionMySQL.getComGolonganDarahDao();
                 oComGolonganDarah = comGolonganDarahDao.selectComGolonganDarahById(resultSet.getInt("comGolonganDarahId"));
-                
+
                 patient.setComGolonganDarah(oComGolonganDarah);
                 patient.setPatientId(resultSet.getInt("patientId"));
                 patient.setPatientNo(resultSet.getString("patientNo"));
@@ -231,8 +295,7 @@ public class PatientImplementation implements PatientDao {
             }
         }
     }
-    
-      
+
     @Override
     public Patient selectPatientById(Integer pPatientId) throws Exception {
         PreparedStatement statement;
@@ -251,7 +314,11 @@ public class PatientImplementation implements PatientDao {
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 oPatient = new Patient();
+                ComGolonganDarah oComGolonganDarah;
+                ComGolonganDarahDao comGolonganDarahDao = ConnectionMySQL.getComGolonganDarahDao();
+                oComGolonganDarah = comGolonganDarahDao.selectComGolonganDarahById(resultSet.getInt("comGolonganDarahId"));
 
+                oPatient.setComGolonganDarah(oComGolonganDarah);
                 oPatient.setPatientId(resultSet.getInt("patientId"));
                 oPatient.setPatientNo(resultSet.getString("patientNo"));
                 oPatient.setPatientName(resultSet.getString("patientName"));
@@ -284,7 +351,7 @@ public class PatientImplementation implements PatientDao {
         }
 
     }
-    
+
     public Integer getNoOfRecords() throws Exception {
 
         PreparedStatement statement;
@@ -333,7 +400,7 @@ public class PatientImplementation implements PatientDao {
             }
         }
     }
-    
+
     @Override
     public Patient getPatientById(Integer id) throws Exception {
         PreparedStatement statement;
@@ -360,7 +427,6 @@ public class PatientImplementation implements PatientDao {
 //                Category category;
 //                CategoryDao categoryDao = ConnectionMySQL.getCategoryDao();
 //                category = categoryDao.selectCategotyById(resultSet.getInt("id_cat"));
-
 //                patient.setCategory(category);
                 patient.setPatientName(resultSet.getString("patientName"));
                 patient.setPatientAddress(resultSet.getString("patientAddress"));
@@ -396,6 +462,5 @@ public class PatientImplementation implements PatientDao {
         }
 
     }
-
 
 }
