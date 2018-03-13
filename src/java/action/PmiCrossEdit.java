@@ -16,7 +16,7 @@ import service.ConnectionMySQL;
 
 /**
  *
- * @author mazipan
+ * @author adhi
  */
 public class PmiCrossEdit implements ActionInterface {
 
